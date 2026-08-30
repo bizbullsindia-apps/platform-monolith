@@ -1,0 +1,8 @@
+com/platform/common/TenantFilter.class
+com/platform/tenant/TenantRepository.class
+com/platform/tenant/TenantController.class
+com/platform/PlatformApplication.class
+com/platform/tenant/TenantService.class
+com/platform/tenant/Tenant.class
+com/platform/rbac/Role.class
+com/platform/tenant/TenantContext.class
