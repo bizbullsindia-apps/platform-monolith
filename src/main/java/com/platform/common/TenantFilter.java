@@ -1,14 +1,26 @@
 package com.platform.common;
+
 import com.platform.tenant.TenantContext;
-import jakarta.servlet.*; import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.*;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import java.io.IOException;
+
 @Component
+@Order(1)
 public class TenantFilter implements Filter {
-  public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+  public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+      throws IOException, ServletException {
     HttpServletRequest r = (HttpServletRequest) req;
     String tid = r.getHeader("X-Tenant-ID");
-    if(tid==null||tid.isBlank()) tid="default";
-    try { TenantContext.setTenantId(tid); chain.doFilter(req,res); } finally { TenantContext.clear(); }
+    if (tid == null || tid.isBlank()) tid = TenantContext.getTenantId();
+    if (tid == null || tid.isBlank()) tid = "default";
+    try {
+      TenantContext.setTenantId(tid);
+      chain.doFilter(req, res);
+    } finally {
+      TenantContext.clear();
+    }
   }
 }
