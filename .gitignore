@@ -1,0 +1,11 @@
+target/
+.mvn/
+.env
+*.log
+.DS_Store
+.idea/
+*.iml
+ tenants/
+web/node_modules/
+web/.next/
+mobile/node_modules/
