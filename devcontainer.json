@@ -1,0 +1,31 @@
+{
+  "name": "Platform Monolith - Java 21 - Free Factory",
+  "image": "mcr.microsoft.com/devcontainers/java:21",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "dockerDashComposeVersion": "v2"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "redhat.vscode-yaml",
+        "ms-vscode.vscode-github-actions",
+        "GitHub.copilot",
+        "GitHub.copilot-chat"
+      ]
+    }
+  },
+  "forwardPorts": [8085, 8080, 5432, 6379, 9000, 9001],
+  "portsAttributes": {
+    "8085": {"label": "Your Spring Boot API - Main"},
+    "8080": {"label": "Keycloak Auth"},
+    "9001": {"label": "MinIO Storage"}
+  },
+  "postStartCommand": "echo '✅ Online factory ready! Java 21 + Docker + Git installed' && docker --version && java --version",
+  "shutdownAction": "stopAfter30Minutes",
+  "remoteUser": "vscode"
+}
